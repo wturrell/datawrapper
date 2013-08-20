@@ -68,23 +68,35 @@ function install_html_head($progress) {
 body { background: url(/static/img/bg/wavegrid.png);}
 h1 { font-weight: 300; font-size: 32px;}
 h2 { font-weight: 300; margin-bottom: 20px; font-size: 28px; }
+.sidebar { float: left; width: 200px; margin-right: 20px; }
+.content { float: left; width: 450px; }
         </style>
     </head>
     <body>
-        <div class="modal" style="border:0;box-shadow:0 0 30px rgba(0,0,80,.2)">
+        <div class="modal" style="border:0;box-shadow:0 0 30px rgba(0,0,80,.2); width: 700px; margin-left:-350px">
             <div class="modal-header">
                 <h1>Datawrapper Installation</h1>
+                <p>Welcome to the Datawrapper Installation Script. You have completed step 1 of 5.</p>
                 <div class="progress progress-striped" style=" height:10px">
                   <div class="bar" style="width: <?php echo $progress * 100 ?>%;"></div>
                 </div>
             </div>
           <div class="modal-body">
-
+            <div class="sidebar">
+                Progress
+                <ul class="nav nav-tabs nav-stacked">
+                  <li class="active"><a>Database</a></li>
+                  <li class="disabled"><a>Database</a></li>
+                  <li class="disabled"><a>Database</a></li>
+                </ul>
+            </div>
+            <div class="content">
         <?php
 }
 
 function install_html_foot() {
-    ?></div></div></body></html><?php
+    ?></div></div>
+    </div></body></html><?php
 }
 
 function run() {
