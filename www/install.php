@@ -14,9 +14,9 @@
 
 function prompt_database_config() {
     ?>
-    <form class="form-horizontal">
+    <h2>Database configuration</h2>
+    <form class="form form-vertical">
         <fieldset>
-            <legend>Database configuration</legend>
             <div class="control-group">
                 <label class="control-label" for="db-name">Database name</label>
                 <div class="controls">
@@ -26,13 +26,13 @@ function prompt_database_config() {
             <div class="control-group">
                 <label class="control-label" for="db-name">Database user</label>
                 <div class="controls">
-                  <input type="text" id="db-user" placeholder="datawrapper">
+                  <input type="text" id="db-user" placeholder="user">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="db-name">Database password</label>
                 <div class="controls">
-                  <input type="text" id="db-password" placeholder="datawrapper">
+                  <input type="text" id="db-password" placeholder="secret">
                 </div>
             </div>
             <div class="control-group">
@@ -57,15 +57,29 @@ function init_database_config() {
     return true;
 }
 
-function install_html_head() {
-    ?><html>
+function install_html_head($progress) {
+    ?><!DOCTYPE html><html lang="en">
     <head>
+        <meta charset="utf-8">
         <title>Datawrapper Installation</title>
-        <link href="/static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/vendor/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <style type="text/css">
+body { background: url(/static/img/bg/wavegrid.png);}
+h1 { font-weight: 300; font-size: 32px;}
+h2 { font-weight: 300; margin-bottom: 20px; font-size: 28px; }
+        </style>
     </head>
     <body>
-        <div class="container">
-            <div class="span6 offset3">
+        <div class="modal" style="border:0;box-shadow:0 0 30px rgba(0,0,80,.2)">
+            <div class="modal-header">
+                <h1>Datawrapper Installation</h1>
+                <div class="progress progress-striped" style=" height:10px">
+                  <div class="bar" style="width: <?php echo $progress * 100 ?>%;"></div>
+                </div>
+            </div>
+          <div class="modal-body">
+
         <?php
 }
 
@@ -74,7 +88,7 @@ function install_html_foot() {
 }
 
 function run() {
-    install_html_head();
+    install_html_head(0.2);
     prompt_database_config();
     install_html_foot();
 }
