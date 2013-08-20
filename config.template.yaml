@@ -1,8 +1,8 @@
 # Datawrapper configuration
 #
 
-domain: datawrapper
-chart_domain: c.datawrapper
+domain: %DOMAIN%
+chart_domain: %CHART_DOMAIN%
 
 ## the following keys are used to hash passwords.
 ##
