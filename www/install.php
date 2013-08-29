@@ -5,11 +5,14 @@
  *
  * It will do the following things:
  *
- * - prompt for database name, user and password
- * - copy the db config master to the config file
+ * - check if server config is sufficient (PHP version, etc)
+ * - prompt database name, user and password
+ * - create the database config from template
+ * - prompt domain setup and create the main config.yaml from template
  * - create the database tables using schema.sql
+ * - fix directory permissions (or ask user to do it)
  * - create an admin user
- * - activate the core plugins
+ * - install the core plugins
  */
 
 function prompt_database_config() {
