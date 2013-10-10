@@ -10,12 +10,14 @@ define([
     './visualize/liveUpdate',
     './visualize/updateSize',
     './visualize/options',
+    './visualize/axesEditor',
     'js/misc/classify',
     './visualize/colorpicker',
     'js/misc/jquery.easing'],
 
 function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
-    initTabNav, enableInlineEditing, liveUpdate, updateSize, options, classify) {
+    initTabNav, enableInlineEditing, liveUpdate, updateSize, options, axesEditor,
+    classify) {
 
     var _typeHasChanged = false,
         _themeHasChanged = false,
@@ -55,6 +57,9 @@ function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
 
         options.init(chart, visJSON);
         iframe.one('load', options.sync);
+
+        // init axes editor
+        axesEditor.init(chart, visJSON);
     }
 
     function onChartSave(chart) {
