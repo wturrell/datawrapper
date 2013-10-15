@@ -17,7 +17,7 @@ define(function() {
 
     function load() {
         var dfd = $.Deferred(),
-            themeid = $('#select-theme').val(),
+            themeid = chart.get('theme'),
             theme = themesById[themeid],
             needed = [themeid];
 

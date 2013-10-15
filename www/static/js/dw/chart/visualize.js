@@ -27,13 +27,15 @@ function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
         __updateSizeTimer,
         chart = dw.backend.currentChart,
         visMetas = {},
-        iframe = $('#iframe-vis');
+        iframe = $('#iframe-vis'),
+        visJSON;
 
-    function init(themesJSON, _visMetas, visJSON) {
+    function init(themesJSON, _visMetas, _visJSON) {
 
         themes.init(themesJSON);
 
         visMetas = _visMetas;
+        visJSON = _visJSON;
 
         dw.backend.__currentVisLoaded = loadVisDfd.promise();
 
@@ -57,9 +59,6 @@ function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
 
         options.init(chart, visJSON);
         iframe.one('load', options.sync);
-
-        // init axes editor
-        axesEditor.init(chart, visJSON);
     }
 
     function onChartSave(chart) {
@@ -274,6 +273,7 @@ function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
             }
         });
         themes.load();
+        axesEditor.init(chart, visJSON);
     }
 
     function updateVisBackground() {  // and show msg if chart needs more space
