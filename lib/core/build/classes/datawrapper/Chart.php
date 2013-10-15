@@ -142,6 +142,14 @@ class Chart extends BaseChart {
     }
 
     /**
+     * returns true if a dataset has been uploaded already
+     */
+    public function hasData() {
+        $filename = $this->getDataPath() . '/' . $this->getDataFilename();
+        return file_exists($filename) && file_get_contents($filename) != '';
+    }
+
+    /**
      * checks wether a chart is writeable by a certain user
      *
      * @param user
