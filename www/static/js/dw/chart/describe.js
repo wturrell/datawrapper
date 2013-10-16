@@ -1,7 +1,8 @@
 
 define(['handsontable'], function(handsontable) {
 
-    var _chartLocale;
+    var _chartLocale,
+        _reload = $.Callbacks();
 
     function init(chartLocale) {
         _chartLocale = chartLocale; // store in upper scope
@@ -68,7 +69,7 @@ define(['handsontable'], function(handsontable) {
         var chart = dw.backend.currentChart,
             dataset;
 
-        chart.onChange(reload);
+        _reload.add(reload);
 
         chart.sync('#describe-source-name', 'metadata.describe.source-name');
         chart.sync('#describe-source-url', 'metadata.describe.source-url');
@@ -89,6 +90,12 @@ define(['handsontable'], function(handsontable) {
 
         $('#reset-data-changes').click(function(){
             metadata.changes.revert();
+        });
+
+        $('a[href=#upload]').click(function(e) {
+            e.preventDefault();
+            $('.dw-create-upload').removeClass('hidden');
+            $('.dw-create-describe').addClass('hidden');
         });
 
         // add event handler for ignoring data series
@@ -153,6 +160,7 @@ define(['handsontable'], function(handsontable) {
         $('#describe-source-url').blur(storeCorrectedSourceUrl);
 
         reload();
+        chart.observe(reload);
 
         // save changes before navigating to next step
         $('a[href=visualize]').click(function(evt) {
@@ -313,11 +321,17 @@ define(['handsontable'], function(handsontable) {
             }
         } // end updateTable()
 
-        function reload(f) {
-            chart.load().done(function(ds) {
+        function reload(f, changes, csvData) {
+            if (_.isArray(changes)) { // chart.observe()
+                chart.reload().done(reloaded);
+            } else { // reload()
+                // load data from remote csv
+                chart.load(csvData).done(reloaded);
+            }
+            function reloaded(ds) {
                 dataset = ds;
                 updateTable();
-            });
+            }
         }
 
         function hasCorner() {
@@ -569,7 +583,8 @@ define(['handsontable'], function(handsontable) {
     } // end init();
 
     return {
-        init: init
+        init: init,
+        reload: _reload.fire
     };
 
 });
