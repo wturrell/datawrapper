@@ -7,6 +7,7 @@
 
 <script type="text/javascript">
 dw.backend.ready(function() {
+
     require(['dw/chart/upload'], function(upload) {
         upload.init();
     });
@@ -22,7 +23,6 @@ dw.backend.ready(function() {
 
 {% include "chart/upload/upload.twig" %}
 
-<hr />
 {# DESCRIBE #}
 
 {% include "chart/upload/describe.twig" %}
