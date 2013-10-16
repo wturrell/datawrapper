@@ -86,3 +86,7 @@
 #reset-data-changes {
     margin-top: 20px;
 }
+
+#data-preview {
+    box-shadow: 0 0 30px rgba(0,0,0,.1);
+}
