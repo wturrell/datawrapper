@@ -1,5 +1,5 @@
 
-define(function() {
+define(['./describe'], function(describe) {
 
     var chart;
 
@@ -8,7 +8,7 @@ define(function() {
         chart = dw.backend.currentChart;
 
         $('#upload-data, .create-nav .submit').click(function(e) {
-            uploadData('describe');
+            uploadData('#describe');
             e.preventDefault();
         });
 
@@ -24,6 +24,7 @@ define(function() {
         });
 
         initDemoDatasets();
+        initTextareaPasteListener();
     }
 
     function initFileUpload() {
@@ -46,7 +47,7 @@ define(function() {
             },
             multiple: false,
             onComplete: function(code, filename, res) {
-                if (res.status == "ok") nextPage('describe');
+                if (res.status == "ok") nextPage('#describe');
                 else {
                     dw.backend.logError(res.message, txtarea.parent().parent());
                 }
@@ -65,9 +66,14 @@ define(function() {
         });
     }
 
-
-    function nextPage(url) {
-        location.href = url;
+    function nextPage(url, csvData) {
+        if (url == '#describe') {
+            $('.dw-create-upload').addClass('hidden');
+            $('.dw-create-describe').removeClass('hidden');
+            describe.reload(null, null, csvData);
+        } else {
+            location.href = url;
+        }
     }
 
     function uploadData(url) {
@@ -78,6 +84,7 @@ define(function() {
             $('.upload-form .control-group').addClass('warning');
             return false;
         }
+        if (url == '#describe') nextPage(url, theData);
         uploadReady = $.ajax({
             url: '/api/charts/' + chart.get('id') + '/data',
             type: 'PUT',
@@ -94,7 +101,7 @@ define(function() {
             if (_.isArray(res)) res = res[0];
             if (res.status == "ok") {
                 // data is saved correctly, so proceed
-                nextPage(url);
+                if (url != '#describe') nextPage(url);
             } else {
                 alert('error: '+res.message);
             }
@@ -112,7 +119,30 @@ define(function() {
                     dw.backend.currentChart.set(key, val);
                 });
             }
+            uploadData('#describe');
         });
+    }
+
+    function initTextareaPasteListener() {
+        var txt = $('#upload-data-text'),
+            lastVal = txt.val();
+
+        txt.on('keyup', function(evt) {
+            console.log(evt.keyCode, evt.ctrlKey);
+            if (evt.keyCode == 93 || evt.keyCode == 91 || evt.ctrlKey) {
+                txtChanged();
+            }
+            lastVal = txt.val();
+        }).on('click', txtChanged);
+
+        function txtChanged() {
+            if (lastVal != txt.val()) {
+                if (lastVal === '' && txt.val().length > 1) {
+                    uploadData('#describe');
+                }
+            }
+            lastVal = txt.val();
+        }
     }
 
     return {
