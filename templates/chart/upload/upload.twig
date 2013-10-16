@@ -1,5 +1,5 @@
 
-<div class="dw-create-upload chart-editor">
+<div class="dw-create-upload chart-editor{% if has_data %} hidden{% endif %}">
     <div class="row">
         <div class="span2-5">
             <h3 style="margin-bottom:10px;margin-top:0">{% trans "Upload Your Data" %}</h3>
@@ -39,7 +39,7 @@
 
     <div class="upload-template hidden">
         <div class="upload-drop">{% trans "drop your csv file here " %}</div>
-        <div class="btn upload-button" id="pick-file-from-disk"><span>
+        <div class="btn upload-button" id="pick-file-from-disk"><span><i class="icon-file"></i>
         {% trans "Upload a CSV file" %}</span></div>
         <ul class="qq-upload-list" style="display:none"></ul>
     </div>

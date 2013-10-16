@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="/static/vendor/handsontable/jquery.handsontable.full.css">
 <link rel="stylesheet" type="text/css" href="/static/vendor/handsontable/jquery.handsontable.bootstrap.css">
 
-<div class="dw-create-describe chart-editor">
+<div class="dw-create-describe chart-editor{% if not has_data %} hidden{% endif %}">
 
     <div class="row">
         <div class="span2-5">

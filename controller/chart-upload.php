@@ -10,7 +10,8 @@ $app->get('/chart/:id/upload', function ($id) use ($app) {
         $page = array(
             'chartData' => $chart->loadData(),
             'chart' => $chart,
-            'datasets' => DatawrapperHooks::execute(DatawrapperHooks::GET_DEMO_DATASETS)
+            'datasets' => DatawrapperHooks::execute(DatawrapperHooks::GET_DEMO_DATASETS),
+            'has_data' => $chart->hasData()
         );
         add_header_vars($page, 'chart', 'chart-editor/upload.css');
         add_editor_nav($page, 1);
