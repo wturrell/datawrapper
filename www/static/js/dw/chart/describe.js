@@ -576,7 +576,7 @@ define(['handsontable'], function(handsontable) {
             if(selectedColumns.length) {
                 deselectColumns();
                 $dataPreview.handsontable('render'); // refresh all cells and column headers
-                showColumnSettings();
+                //showColumnSettings();
             }
         }
 
