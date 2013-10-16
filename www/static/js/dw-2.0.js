@@ -783,9 +783,11 @@ dw.datasource.delimited = function(opts) {
                 method: 'GET',
                 dataType: "text" // NOTE (edouard): Without that jquery try to parse the content and return a Document
             }).then(function(raw) {
+                delimited._raw = raw;
                 return new DelimitedParser(opts).parse(raw);
             });
         } else if (opts.csv) {
+            delimited._raw = opts.csv;
             var dfd = $.Deferred(),
                 parsed = dfd.then(function(raw) {
                 return new DelimitedParser(opts).parse(raw);
@@ -1533,6 +1535,10 @@ dw.chart = function(attributes) {
         visualization,
         metric_prefix,
         change_callbacks = $.Callbacks(),
+        observe_callbacks = $.Callbacks(),
+        observe_timer,
+        observed_changes = [],
+        raw_data,
         locale;
 
     // public interface
@@ -1572,19 +1578,31 @@ dw.chart = function(attributes) {
         },
 
         // loads the dataset and returns a deferred
-        load: function() {
-            var datasource;
-
-            datasource = dw.datasource.delimited({
-                url: 'data.csv',
-                firstRowIsHeader: chart.get('metadata.data.horizontal-header', true),
-                transpose: chart.get('metadata.data.transpose', false)
-            });
-
-            return datasource.dataset().pipe(function(ds) {
+        load: function(csvData) {
+            var delimited,
+                opts = {
+                    firstRowIsHeader: chart.get('metadata.data.horizontal-header', true),
+                    transpose: chart.get('metadata.data.transpose', false)
+                };
+            if (_.isString(csvData)) {
+                opts.csv = csvData;
+            } else {
+                opts.url = 'data.csv';
+            }
+            delimited = dw.datasource.delimited(opts);
+            return delimited.dataset().pipe(function(ds) {
+                raw_data = delimited._raw;
                 chart.dataset(ds);
                 return ds;
             });
+        },
+
+        // reloads the chart with last loaded dataset
+        reload: function() {
+            if (raw_data) {
+                return chart.load(raw_data);
+            }
+            console.warn('cannot reload a chart that has never been loaded before');
         },
 
         // returns the dataset
@@ -1683,6 +1701,7 @@ dw.chart = function(attributes) {
             return attributes;
         },
 
+        // discouraged, use chart.observe instead
         onChange: change_callbacks.add,
 
         columnFormatter: function(column) {
@@ -1708,6 +1727,11 @@ dw.chart = function(attributes) {
                 };
             }
             return column.type(true).formatter(colFormat);
+        },
+
+        observe: function(cb) {
+            observe_callbacks.add(cb);
+            return chart;
         }
 
     };
@@ -1743,6 +1767,15 @@ dw.chart = function(attributes) {
         });
         return dataset;
     }
+
+    change_callbacks.add(function(chart, key, value) {
+        observed_changes.push({ key: key, value: value });
+        clearTimeout(observe_timer);
+        observe_timer = setTimeout(function() {
+            observe_callbacks.fire(chart, observed_changes);
+            observed_changes = [];
+        });
+    });
 
     return chart;
 };
