@@ -36,9 +36,9 @@
     color: inherit;
 }
 .handsontable td.firstRow {
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid #ccc;
     font-weight: bold;
-    background: #f0f0f0;
+    background: #ececec;
 }
 
 .handsontable td.textType {
@@ -85,6 +85,51 @@
 
 #reset-data-changes {
     margin-top: 20px;
+}
+
+#data-preview.handsontable th {
+    color: #777;
+    text-shadow: 1px 1px 0 #fbfbfb;
+}
+
+.handsontable thead th  {
+    background: #fff;
+    background-image: -webkit-linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    background-image:    -moz-linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    background-image:     -ms-linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    background-image:      -o-linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    background-image:         linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    box-shadow: inset 0px 2px 1px hsla(0,0%,100%,1);
+    border-right: 1px solid hsl(210,0%,70%);
+}
+
+.handsontable tbody th  {
+    background: #fff;
+    background-image: -webkit-linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    background-image:    -moz-linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    background-image:     -ms-linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    background-image:      -o-linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    background-image:         linear-gradient(top, hsla(0,0%,60%,.1), hsla(210,0%,90%,1));
+    line-height: 28px;
+    border-right: 1px solid hsl(210,00%,60%)!important;
+}
+
+.handsontable thead th.selected {
+    background: #fff;
+    background-image: -webkit-linear-gradient(top, hsla(210,30%,60%,.1), hsla(210,30%,85%,1));
+    background-image:    -moz-linear-gradient(top, hsla(210,30%,60%,.1), hsla(210,30%,85%,1));
+    background-image:     -ms-linear-gradient(top, hsla(210,30%,60%,.1), hsla(210,30%,85%,1));
+    background-image:      -o-linear-gradient(top, hsla(210,30%,60%,.1), hsla(210,30%,85%,1));
+    background-image:         linear-gradient(top, hsla(210,30%,60%,.1), hsla(210,30%,85%,1));
+    box-shadow: inset 0px 2px 2px hsla(0,0%,100%,1);
+}
+
+.handsontable tr:first-child td.firstRow {
+    border-top: 1px solid hsl(210,00%,60%)!important;
+}
+
+.handsontable tr:first-child td.firstRow.area {
+    border-top: 1px solid hsl(210,20%,60%)!important;
 }
 
 #data-preview {
