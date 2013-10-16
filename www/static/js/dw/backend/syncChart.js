@@ -93,7 +93,7 @@ define(function() {
             }
         };
 
-        chart.onChange(function() {
+        chart.observe(function(chart, changes) {
             unsavedChanges = true;
             clearTimeout(saveTimeout);
             saveTimeout = setTimeout(save, 800);

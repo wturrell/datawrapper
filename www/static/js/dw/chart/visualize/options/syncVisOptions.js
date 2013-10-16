@@ -26,7 +26,7 @@ define(function() {
                 });
             }
         });
-        chart.onChange(checkDepends);
+        chart.observe(checkDepends);
 
         /*
          * check visibility of each option (evaluate "depends-on" property)

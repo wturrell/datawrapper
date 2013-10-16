@@ -118,11 +118,13 @@ function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
         chart.sync('#describe-source-name', 'metadata.describe.source-name');
         chart.sync('#describe-source-url', 'metadata.describe.source-url');
 
-        chart.onChange(function(chart, key, value) {
-            if (key == 'type') _typeHasChanged = true;
-            if (key == 'theme') _themeHasChanged = true;
-            if (key.substr(0, 13) == 'metadata.axes') _axesHaveChanged = true;
-            if (key == 'metadata.data.transpose') _transposed = true;
+        chart.observe(function(chart, changes) {
+            _.each(changes, function(change) {
+                if (change.key == 'type') _typeHasChanged = true;
+                if (change.key == 'theme') _themeHasChanged = true;
+                if (change.key.substr(0, 13) == 'metadata.axes') _axesHaveChanged = true;
+                if (change.key == 'metadata.data.transpose') _transposed = true;
+            });
             liveUpdate.update(iframe, chart.attributes());
         });
     }
