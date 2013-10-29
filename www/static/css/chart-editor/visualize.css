@@ -1,2 +1,9 @@
 /* styles for visualize step */
 
+.axes-editor .axis label {
+    font-size: 11px;
+    color: #777;
+    text-transform: uppercase;
+    margin: 0 0 3px 2px;
+    font-weight: bold;
+}
