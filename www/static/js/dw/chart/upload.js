@@ -12,7 +12,9 @@ define(['./describe'], function(describe) {
             e.preventDefault();
         });
 
-        initFileUpload();
+        var txtarea = $('#upload-data-text');
+
+        initFileUpload(txtarea);
 
         $('.submit').click(function(e) {
             if (txtarea.val() != txtarea.data('orig-val')) {
@@ -27,8 +29,7 @@ define(['./describe'], function(describe) {
         initTextareaPasteListener();
     }
 
-    function initFileUpload() {
-        var txtarea = $('#upload-data-text');
+    function initFileUpload(txtarea) {
 
         new qq.FileUploader({
             element: $('#upload')[0],
