@@ -13,7 +13,8 @@ define([
     './visualize/axesEditor',
     'js/misc/classify',
     './visualize/colorpicker',
-    'js/misc/jquery.easing'],
+    'js/misc/jquery.easing',
+    'selectize'],
 
 function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
     initTabNav, enableInlineEditing, liveUpdate, updateSize, options, axesEditor,
@@ -196,7 +197,27 @@ function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
     }
 
     function initVisSelector() {
+
+        $('#chart-type').selectize({
+            render: {
+                option: function(data, escape) {
+                    return '<div class="option">'+
+                        '<img style="height:25px" src="'+data.vis.__static_path+data.value+'.png" /> '+escape(data.text) +
+                        '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div class="item">'+
+                        '<img style="height:25px" src="'+data.vis.__static_path+data.value+'.png" /> '+escape(data.text) +
+                        '</div>';
+                }
+            },
+            onChange: function() {
+                chart.set('type', this.getValue());
+            }
+        });
+
         // graphical vis selector
+        /*
         var unfolded = $('.vis-selector-unfolded'),
             folded = $('.vis-selector-folded'),
             thumbs = $('.vis-thumb'),
@@ -209,10 +230,10 @@ function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
             thumb.addClass('active');
             selVis.html('<img src="'+thumb.data('static-path')+thumb.data('id')+'.png" width="24" />' + thumb.data('title'));
             setTimeout(function() {
-                /*folded.show();
-                unfolded.animate({ height: 0 }, 300, 'easeOutExpo', function() {
-                    unfolded.hide();
-                });*/
+                // folded.show();
+                // unfolded.animate({ height: 0 }, 300, 'easeOutExpo', function() {
+                //     unfolded.hide();
+                // });
                 chart.set('type', thumb.data('id'));
             }, 100);
         });
@@ -224,6 +245,7 @@ function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
 
         unfolded.show();
         folded.hide();
+        // */
     }
 
     function initResizeChart() {
