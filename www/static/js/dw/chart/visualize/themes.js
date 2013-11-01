@@ -45,7 +45,7 @@ define(function() {
     }
 
     function showThemeColors() {
-        var themeid = $('#select-theme').val(),
+        var themeid = chart.get('theme'),
             customColors = $('#palette-colors'),
             theTheme = dw.theme(themeid),
             picker = $('#select-color');
