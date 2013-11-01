@@ -13,24 +13,14 @@
             <div>
                 <p>
                     <label class="checkbox"><input id="has-headers" type="checkbox" checked="checked"> {% trans "First row as label" %}</label>
-                    <label class="checkbox"><input id="transpose" type="checkbox"> {% trans "Transpose data table" %}</label>
                 </p>
             </div>
+            <br />
             <a class="btn" href="#upload"><i class="icon-chevron-left"></i> {% trans "Upload a new dataset" %}</a>
         </div>
         <div class="span7">
 
-            <!--<h2>{% trans "Check and Describe Your Data" %}</h2>-->
-
-            <form class="form-inline">
-                <div id="csv-parse-options" class="row">
-                    <div class="span4">
-                    </div>
-                    <div class="span4">
-
-                    </div>
-                </div>
-            </form>
+            <div class="transpose-help help">⤹ <span>{% trans "Transpose data table" %}</span></div>
 
             <div id="data-preview"></div>
 
