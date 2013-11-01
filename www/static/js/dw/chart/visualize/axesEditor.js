@@ -36,24 +36,24 @@ define(['selectize', 'drag_drop', 'sortable'], function() {
                 });
                 if (axis.multiple) {
                     s.selectize({
-                        plugins: ['drag_drop']
+                        plugins: ['drag_drop'],
+                        onChange: storeAxesConfig
                     });
                 } else {
-                    s.selectize({});
+                    s.selectize({
+                        onChange: storeAxesConfig
+                    });
                 }
+                axis.__select = s.get(0).selectize;
             }
 
             function initDragDrop() {
                 $(".selectize-control.multi.plugin-drag_drop", $c).droppable({
                     accept: ".item",
                     drop: function(evt, ui) {
-                        console.log('item dropped', evt, ui.draggable);
                         var src_axis_el = ui.draggable.parents('.axis'),
                             src_sel = $('select', src_axis_el).get(0).selectize,
                             tgt_sel = $('select', $(evt.target).parents('.axis')).get(0).selectize;
-                        console.log('source', src_sel);
-                        console.log('target', tgt_sel);
-                        console.log('srouce == target', src_sel == tgt_sel);
                         if (src_sel != tgt_sel) {
                             //$('.ui-sortable-placeholder', src_axis_el).remove();
                             //src_sel.close();
@@ -61,9 +61,16 @@ define(['selectize', 'drag_drop', 'sortable'], function() {
                             tgt_sel.addItem(ui.draggable.data('value'));
                             src_sel.blur();
                         }
-                        console.log('item data', ui.draggable.data());
                     }
                 });
+            }
+
+            function storeAxesConfig() {
+                chartAxes = $.extend({}, chartAxes);
+                _.each(visJSON.axes, function(axis, id) {
+                    chartAxes[id] = axis.__select.getValue();
+                });
+                chart.set('metadata.axes', chartAxes);
             }
 
         }
