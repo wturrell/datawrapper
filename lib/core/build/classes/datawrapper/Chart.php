@@ -238,7 +238,7 @@ class Chart extends BaseChart {
                 'number-divisor' => 0,
                 'number-append' => '',
                 'number-prepend' => '',
-                'intro' => ''
+                'intro' => '[ '.__('Here is a nice place for a short introduction').' ]'
             ),
             'publish' => array(
                 'embed-width' => 600,
