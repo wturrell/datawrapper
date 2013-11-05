@@ -1,4 +1,4 @@
-define(function() {
+define(['selectize'], function() {
 
     var chart = dw.backend.currentChart;
     // load dataset
@@ -20,9 +20,10 @@ define(function() {
     $('.highlighted-series .badge').click(highlightSeriesClick);
 
     function initHighlightSeries() {
-        var vis = $('iframe').get(0).contentWindow.__dw &&
-                  $('iframe').get(0).contentWindow.__dw.vis ?
-                  $('iframe').get(0).contentWindow.__dw.vis :
+        var iframe = $('iframe').get(0),
+            vis = iframe.contentWindow.__dw &&
+                  iframe.contentWindow.__dw.vis ?
+                  iframe.contentWindow.__dw.vis :
                   dw.backend.currentVis,
             s = $('#highlight-series'),
             s2 = $('.highlighted-series');
@@ -47,6 +48,7 @@ define(function() {
                 s.val('---');
             }
         });
+        // s.selectize({});
     }
 
     return initHighlightSeries;
