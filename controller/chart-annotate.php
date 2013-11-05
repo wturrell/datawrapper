@@ -14,6 +14,8 @@ $app->get('/chart/:id/annotate', function ($id) use ($app) {
             'chartData' => $chart->loadData(),
             'chart' => $chart,
             'vis' => DatawrapperVisualization::get($chart->getType()),
+            'visualizations_deps' => DatawrapperVisualization::all('dependencies'),
+            'visualizations' => DatawrapperVisualization::all(),
             'themes' => DatawrapperTheme::all(),
             'theme' => DatawrapperTheme::get($chart->getTheme())
         );
