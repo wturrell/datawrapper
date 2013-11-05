@@ -1588,3 +1588,10 @@ html .selectize-control.multi .selectize-input {
     position: static;
 }
 
+.chart-editor .section {
+    margin-bottom: 20px;
+}
+
+.chart-editor .section h3 {
+    margin-bottom: 5px;
+}
