@@ -13,18 +13,20 @@ class DatawrapperPlugin_VisualizationLineChart extends DatawrapperPlugin_Visuali
                 "x" => array(
                     "title" => __("Horizontal (x)"),
                     "accepts" => array("text", "date"),
+                    "labeled" => true
                 ),
                 "y1" => array(
                     "title" => __("Vertical (y)"),
                     "accepts" => array("number"),
-                    "multiple" => true
-                ),
-                "y2" => array(
-                    "title" => __("2nd vertical (y2)"),
-                    "accepts" => array("number"),
                     "multiple" => true,
-                    "optional" => true
+                    "labeled" => true
                 )
+                // "y2" => array(
+                //     "title" => __("2nd vertical (y2)"),
+                //     "accepts" => array("number"),
+                //     "multiple" => true,
+                //     "optional" => true
+                // )
             ),
             "options" => $this->getOptions(),
             "locale" => array(
