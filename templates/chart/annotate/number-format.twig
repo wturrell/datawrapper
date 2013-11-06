@@ -1,0 +1,68 @@
+
+<div id="number-format-modal" class="modal hide">
+
+    <div class="modal-body">
+        <div id="number-column-options" class="form-horizontal compact">
+            <h2>{% trans "Output number format" %}</h2>
+
+            {# <p>
+                <label class="checkbox" for="automatic-format"><input id="automatic-format" type="checkbox"> {% trans "Automatic number formatting" %}</label>
+            </p> #}
+
+            <div class="row">
+                <div class="span4">
+
+                    <div class="control-group number-format">
+                        <label class="control-label" for="text-title">{% trans "Divide numbers by" %}</label>
+
+                        <div class="controls">
+                            <select class="number-format" id="number-divisor" style="width:90%">
+                                <option value="0">-</option>
+                                <option value="3">{% trans "1000" %}</option>
+                                <option value="6">{% trans "1 million" %}</option>
+                                <option value="9">{% trans "1 billion" %}</option>
+                                <optgroup label="─────────────"></optgroup>
+                                <option value="-2">{% trans "1 hundredth (deci)" %}</option>
+                                <option value="-3">{% trans "1 thousandth (milli)" %}</option>
+                                <option value="-6">{% trans "1 millionth (micro)" %}</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group number-format">
+                        <label class="control-label" for="text-title">{% trans "Round numbers to" %}</label>
+
+                        <div class="controls">
+                            <select id="number-format" class="select number-format" style="width:90%">
+                                <option value="-">{% trans "keep original" %}</option>
+                                <optgroup label="{% trans "Decimal places" %}">
+                                {% for id, format in numberformats %}
+                                    <option value="{{ id }}">{{ format }}</option>
+                                {% endfor %}
+                                </optgroup>
+                                <optgroup label="{% trans "Significant digits" %}">
+                                {% for id, format in significantdigits %}
+                                    <option value="{{ id }}">{{ format }}</option>
+                                {% endfor %}
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group number-format">
+                        <label class="control-label" for="text-title">{% trans "Prepend/Append" %}</label>
+
+                        <div class="controls">
+                            <input type="text" id="number-prepend" style="width:3em;text-align:right"/> # <input type="text" id="number-append" style="width:3em"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div> {# end div.span2 #}
+            <div class="span2">
+                Preview
+            </div> {# end div.span2 #}
+        </div> {# end div.row #}
+    </div>{# end div.modal-body #}
+</div>{# end div.modal #}
