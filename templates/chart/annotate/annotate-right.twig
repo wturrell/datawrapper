@@ -1,0 +1,26 @@
+
+<div class="story-title">
+    <ul class="unstyled">
+        <li><a href="#" class="insert-title">{% trans "Insert chart title" %}</a></li>
+        <li><a href="#" class="insert-intro">{% trans "Insert chart description" %}</a></li>
+    </ul>
+</div>
+
+<div class="section story-highlight">
+    <h3>{% trans "Highlight" %}</h3>
+    <p>{% trans "Highlight the most import elements (optional)" %}</p>
+    <div>
+        <select id="highlight-series">
+            <option value="---">- {% trans "select element" %} -</option>
+        </select>
+    </div>
+    <p class="highlighted-series">
+        {% for series in vismeta['highlighted-series'] %}
+        <span data-series="{{ series }}" class="badge badge-info"><i class="icon-remove icon-white"></i>{{ series }}</span>
+        {% endfor %}
+    </p>
+</div>
+
+<div class="section">
+    <h3>{% trans "Annotate" %}</h3>
+</div>
