@@ -1,7 +1,35 @@
 
-<h3>{% trans "Select layout:" %}</h3>
-<select id="select-theme" class="span2">
-    {% for theme in themes %}{% if not theme.hidden %}
-    <option value="{{ theme.id }}">{{ theme.title }}</option>
-    {% endif %}{% endfor %}
-</select>
+<div class="section">
+    <h3>{% trans "Select layout:" %}</h3>
+    <select id="select-theme">
+        {% for theme in themes %}{% if not theme.hidden %}
+        <option value="{{ theme.id }}">{{ theme.title }}</option>
+        {% endif %}{% endfor %}
+    </select>
+</div>
+
+<div class="section">
+    <h3>{% trans "Colors" %}</h3>
+
+    {% include "chart/annotate/base-color-selector.twig" %}
+</div>
+
+<div class="section">
+    <h3>{% trans "Formatting" %}</h3>
+
+    <div class="axis-formatting">
+    {% for axis in vis.axes %}
+
+        {% if axis.labeled %}
+        <div class="axis" data-axis="{{ axis.id }}">
+            <label>{{ axis.title }}</label>
+            <div class="column-names"></div>
+            <div class="value-preview"></div>
+        </div>
+        {% endif %}
+
+    {% endfor %}
+    </div>
+
+    {% include "chart/annotate/number-format.twig" %}
+</div>
