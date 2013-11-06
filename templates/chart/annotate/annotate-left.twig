@@ -17,7 +17,7 @@
 <div class="section">
     <h3>{% trans "Formatting" %}</h3>
 
-    <div class="axis-formatting">
+    <div class="axis-format">
     {% for axis in vis.axes %}
 
         {% if axis.labeled %}
@@ -25,6 +25,7 @@
             <label>{{ axis.title }}</label>
             <div class="column-names"></div>
             <div class="value-preview"></div>
+            <div class="btn btn-small">{% trans "customize" %}</div>
         </div>
         {% endif %}
 
