@@ -1,19 +1,21 @@
 
 {# axes editor #}
 
-<h3>{% trans "Dimensions" %}</h3>
-
-<div class="axes-editor">
+<h3>{% trans "Customize Mapping" %}</h3>
 
     <p>{% trans "You can drag around the data columns to the available visual axes (dimensions)." %}</p>
 
-    {% for axis in vis.axes %}
 
-    <div class="axis" data-axis="{{ axis.id }}">
-        <label>{{ axis.title }}</label>
-        <select{% if axis.multiple %} multiple="multiple"{% endif %}></select>
+<div class="columns">
+</div>
+
+<div class="axes">
+
+    <div class="template-axis">
+        <div class="head axis-title">Axis Title</div>
+        <div class="body">
+            <div class="axis-columns"></div>
+        </div>
     </div>
-
-    {% endfor %}
 
 </div>
