@@ -1,6 +1,5 @@
 
 define([
-    './visualize/options',
     './visualize/themes',
     './visualize/checkChartHeight',
     './visualize/updateSize',
@@ -8,7 +7,6 @@ define([
     './visualize/initTabNav',
     './visualize/enableInlineEditing',
     './visualize/liveUpdate',
-    './visualize/updateSize',
     './visualize/options',
     './visualize/axesEditor',
     './visualize/updateVisBackground',
@@ -17,9 +15,8 @@ define([
     'js/misc/jquery.easing',
     'selectize'],
 
-function(initHighlightSeries, visOptions, themes, checkChartHeight, loadVisDfd,
-    initTabNav, enableInlineEditing, liveUpdate, updateSize, options, axesEditor,
-    updateVisBackground, classify) {
+function(themes, checkChartHeight, updateSize, loadVisDfd, initTabNav, enableInlineEditing,
+    liveUpdate, options, axesEditor, updateVisBackground, classify) {
 
     var _typeHasChanged = false,
         _axesHaveChanged = false,
