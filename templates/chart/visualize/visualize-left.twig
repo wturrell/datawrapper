@@ -1,29 +1,38 @@
 
-<div class="section">
-    <h3>{% trans "Chart type" %}</h3>
+<div class="chart-type-axis-preview">
+    <div class="section">
+        <h3>{% trans "Chart type" %}</h3>
 
-    <select id="chart-type">
-        {% for vis in visualizations %}{% if vis.title %}
-            <option data-data='{"text":"{{ vis.title }}","value":"{{ vis.id }}","vis":{{ vis | json | raw }} }' value="{{ vis.id }}" {% if vis.id == chart.type %} selected="selected"{% endif %}>{{ vis.title }}</option>
-        {% endif %}{% endfor %}
-    </select>
-    <p>
-        <b>{% trans "Hint" %}:</b> {% trans "In case the visualization doesn't look like you expected, you should try to <a href='#' id='btn-transpose'><i class='icon-rotate'></i> transpose the data</a>." %}
-    </p>
-</div>
-
-{# todo: axes editor #}
-
-<div class="section">
-    {% include "chart/visualize/axes-editor.twig" %}
-
-    {% if vis.dimensions == 1 %}
-    <div class="control-group select-row">
-        <label class="control-label" for="text-title">{% trans "Initial row to display" %}</label>
-        <div class="controls">
-            <select id="select-row" style="width:100%">
-            </select>
-        </div>
+        <select id="chart-type">
+            {% for vis in visualizations %}{% if vis.title %}
+                <option data-data='{"text":"{{ vis.title }}","value":"{{ vis.id }}","vis":{{ vis | json | raw }} }' value="{{ vis.id }}" {% if vis.id == chart.type %} selected="selected"{% endif %}>{{ vis.title }}</option>
+            {% endif %}{% endfor %}
+        </select>
+        <p>
+            <b>{% trans "Hint" %}:</b> {% trans "In case the visualization doesn't look like you expected, you should try to <a href='#' id='btn-transpose'><i class='icon-rotate'></i> transpose the data</a>." %}
+        </p>
     </div>
-    {% endif %}
+
+    {# todo: axes editor #}
+
+    <div class="section axes-preview">
+        <h3>{% trans "Axes mapping" %}</h3>
+
+        <a href="#axes-editor" class="btn-customize btn">{% trans "Customize" %}</a>
+
+        {% if vis.dimensions == 1 %}
+        <div class="control-group select-row">
+            <label class="control-label" for="text-title">{% trans "Initial row to display" %}</label>
+            <div class="controls">
+                <select id="select-row" style="width:100%">
+                </select>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="axes-editor hide">
+    <div class="section">
+        {% include "chart/visualize/axes-editor.twig" %}
+    </div>
 </div>
