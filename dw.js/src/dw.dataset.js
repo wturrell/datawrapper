@@ -92,14 +92,11 @@ dw.dataset = function(columns, opts) {
 
         /*
          * removes ignored columns from dataset
+         * DEPRECATED!
+         *   left empty stub for backward-compatibility
          */
         filterColumns: function(ignore) {
-            columns = _.filter(columns, function(c) {
-                return !ignore[c.name()];
-            });
-            _.each(ignore, function(ign, key) {
-                if (ign && columnsByName[key]) delete columnsByName[key];
-            });
+            console.warn('dataset.filterColumns() is deprecated!');
             return dataset;
         },
 
