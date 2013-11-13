@@ -13,7 +13,14 @@ dw.backend.ready(function() {
     });
 
     require(['dw/chart/describe'], function(describe) {
-        describe.init("{{ chartLocale }}");
+        describe.init("{{ chartLocale }}", {
+            columnType: "{% trans 'Column type' %}",
+            inputFormat: "{% trans 'Input format' %}",
+            auto: "{% trans 'Automatic' %}",
+            text: "{% trans 'Text' %}",
+            number: "{% trans 'Number' %}",
+            date: "{% trans 'Date' %}"
+        });
     });
 
 });
