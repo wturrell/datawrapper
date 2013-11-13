@@ -1595,3 +1595,36 @@ html .selectize-control.multi .selectize-input {
 .chart-editor .section h3 {
     margin-bottom: 5px;
 }
+
+/* context menu */
+html .context-menu-list {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    background: #fff;
+}
+
+html .context-menu-list .context-menu-item {
+    padding: 3px 2px 3px 24px;
+    background: #fff;
+}
+
+
+html .context-menu-list .context-menu-item:hover {
+    padding: 3px 2px 3px 24px;
+    background: #9cf;
+}
+
+html .context-menu-submenu:after {
+    content: "‣";
+    color: #999;
+    font-size: 14px;
+    font-family: Arial;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    z-index: 1;
+}
+
+html .context-menu-submenu:hover:after {
+    color: #fff;
+}
