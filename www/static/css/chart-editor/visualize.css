@@ -12,6 +12,11 @@
     margin-top: 15px;
     overflow:auto;
     margin-bottom: 20px;
+    cursor: pointer;
+    padding: 10px 10px 5px;
+    background: #f5f3f3;
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 4px rgba(0,0,0,.1);
 }
 
 .axes-editor .axis {
