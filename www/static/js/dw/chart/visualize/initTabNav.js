@@ -13,6 +13,14 @@ define(['./axesEditor'], function(axesEditor) {
             axesEditor.initUI();
         });
 
+        $('.visualize-left .axes-editor .btn-return').click(function(evt) {
+            evt.preventDefault();
+            $('.visualize-left').addClass('span2-5').removeClass('span5');
+            $('.visualize-right').show();
+            $('.visualize-left .chart-type-axis-preview').removeClass('hide');
+            $('.visualize-left .axes-editor').addClass('hide');
+        });
+
     };
 
 });
