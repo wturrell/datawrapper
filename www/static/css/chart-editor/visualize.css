@@ -132,7 +132,8 @@
     margin-top: 0px!important;
 }
 
-.column.ui-draggable.not-accepted {
+.column.ui-draggable.not-accepted,
+.axis-columns .column.not-accepted {
     background: #d63!important;
 }
 
