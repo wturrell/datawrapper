@@ -159,8 +159,10 @@ define(['dragdrop'], function() {
 
                 colDiv.droppable({
                     accept: '.column',
-                    drop: function() {
-                        console.log('drop!');
+                    drop: function(evt, ui) {
+                        ui.draggable.remove();
+                        clearTimeout(_storeTo);
+                        _storeTo = setTimeout(storeConfig, 500);
                     }
                 });
 
