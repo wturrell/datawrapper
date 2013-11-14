@@ -58,6 +58,26 @@
     text-align: center;
 }
 
+.axes-editor .column-text:before {
+    content: "T ";
+    font-family: "Times New Roman";
+    opacity: 0.7;
+}
+
+.axes-editor .column-number:before {
+    content: "# ";
+    opacity: 0.7;
+}
+.axes-editor .column-date:before {
+    content: " ";
+    opacity: 0.8;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    padding-right: 4px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAAA3NCSVQICAjb4U/gAAAAGFBMVEX///////////////////////////////8pK8DIAAAACHRSTlMAESIzVWaI/7R6FnwAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAYdEVYdENyZWF0aW9uIFRpbWUAMTQuMTEuMjAxM+cBdXwAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAAOklEQVQImWNgcC8vYWBgKxF0T2BwVyhgKmEoYShgcGcoBJLqQLK8QB0owsAQDpRlYC4BqlQCqgTrAgBf6wuC7zh6ywAAAABJRU5ErkJggg==) top left no-repeat;
+}
+
 .axes-editor .axis .axis-columns .column {
     margin: 0 0 5px;
     text-align: center;

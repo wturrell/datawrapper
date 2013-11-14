@@ -66,6 +66,30 @@
 .handsontable td.textType {
     color: #000000;
 }
+
+.handsontable .firstRow:before {
+    padding: 0 4px 0 0;
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+.handsontable .textType.firstRow:before {
+    content: "T";
+    font-family: "Times New Roman";
+}
+
+.handsontable .numberType.firstRow:before {
+    content: "#";
+}
+
+.handsontable .dateType.firstRow:before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKBAMAAAB/HNKOAAAAA3NCSVQICAjb4U/gAAAAElBMVEX///8egRgegRgegRgegRgegRjy092zAAAABnRSTlMAESIzVf/1/sNDAAAACXBIWXMAAAsSAAALEgHS3X78AAAAGHRFWHRDcmVhdGlvbiBUaW1lADE0LjExLjIwMTPnAXV8AAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M1cbXjNgAAADdJREFUCJkti7EJACAQxKI4gBaOcr0jvBzuv4qPWKQJCegYmocW6lGMCZQEk82JmYY06lT/8l0X+SgIGJWtl0IAAAAASUVORK5CYII=) top left no-repeat;
+}
+
 .handsontable td.dateType {
     color: #39A832;
     font-style: italic;
