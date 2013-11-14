@@ -36,7 +36,9 @@ define(['dragdrop'], function() {
                 var c = $('<div />')
                             .html(column.title())
                             .attr('data-id', column.name())
+                            .attr('data-type', column.type())
                             .addClass('column')
+                            .addClass('column-'+column.type())
                             .appendTo(colDiv);
             }
 
@@ -46,7 +48,8 @@ define(['dragdrop'], function() {
                             .data('id', id)
                             .addClass(axis.multiple ? 'multiple' : 'single')
                             .appendTo(axesDiv);
-                $('.axis-title', d).html(axis.id);
+
+                $('.axis-title', d).html(axis.title ? axis.title : axis.id);
 
                 // populate axes
                 var columns = visAxes[id],
@@ -56,6 +59,8 @@ define(['dragdrop'], function() {
                 _.each(columns, function(col) {
                     $('<div />').addClass('column')
                         .html(col.title())
+                        .attr('data-type', col.type())
+                        .addClass('column-'+col.type())
                         .attr('data-id', col.name())
                         .appendTo(axesColDiv);
                 });
@@ -78,59 +83,85 @@ define(['dragdrop'], function() {
                     }
                 });
 
-                $(".axis-columns").sortable({
-                    connectWith: '.axis-columns',
-                    revert: true,
-                    scroll: true,
-                    revertDuration: 100,
-                    placeholder: "sortable-placeholder"
-                })
+                $(".axis").each(function() {
 
-                .droppable({
-                    activeClass: 'highlight',
-                    revertDuration: 100,
+                    var $axis = $(this);
 
-                    over: function(evt, ui) {
-                        // check if we can accept the draggable
-                        var context = this,
-                            $axisColumns = $(this),
-                            $axis = $axisColumns.parents('.axis'),
-                            draggedColumn = ui.draggable.data('id'),
-                            accept = true;
+                    $('.axis-columns', $axis).sortable({
+                        connectWith: '.axis-columns',
+                        revert: true,
+                        scroll: true,
+                        revertDuration: 100,
+                        placeholder: "sortable-placeholder"
+                    })
 
-                        if (_visJSON.axes[$axis.data('id')].accepts.indexOf(ds.column(draggedColumn).type()) < 0) {
-                            ui.draggable.addClass('not-accepted');
-                            ui.helper.addClass('not-accepted');
-                        }
+                    .droppable({
+                        activeClass: 'highlight',
+                        revertDuration: 100,
 
-                        $('.column', $axisColumns).each(function() {
-                            if (toBeRemoved(this, ui, context)) {
-                                $(this).addClass('soon-to-be-removed');
+                        // accept: function(draggable) {
+                        //     //console.log(draggable.data('type'), $axis.data('id'), _visJSON.axes[$axis.data('id')].accepts.indexOf(draggable.data('type')) >= 0);
+                        //     return _visJSON.axes[$axis.data('id')].accepts.indexOf(draggable.data('type')) >= 0;
+                        // },
+
+                        over: function(evt, ui) {
+                            // check if we can accept the draggable
+                            var context = this,
+                                $axisColumns = $(this),
+                                draggedColumn = ui.draggable.data('id'),
+                                accept = true;
+
+                            if (_visJSON.axes[$axis.data('id')].accepts.indexOf(ui.draggable.data('type')) < 0) {
+                                ui.draggable.addClass('not-accepted');
+                                ui.helper.addClass('not-accepted');
+                            } else {
+                                ui.draggable.removeClass('not-accepted');
+                                ui.helper.removeClass('not-accepted');
                             }
-                        });
-                    },
 
-                    out: function(evt, ui) {
-                        $('.column', this).removeClass('soon-to-be-removed');
-                    },
+                            $('.column', $axisColumns).each(function() {
+                                if (toBeRemoved(this, ui, context)) {
+                                    $(this).addClass('soon-to-be-removed');
+                                }
+                            });
+                        },
 
-                    drop: function(event, ui) {
-                        var context = this,
-                            $axisColumns = $(this),
-                            $axis = $axisColumns.parents('.axis'),
-                            draggedColumn = ui.draggable.data('id'),
-                            newColumn = ui.draggable.hasClass('ui-draggable');
+                        out: function(evt, ui) {
+                            $('.column', this).removeClass('soon-to-be-removed');
+                        },
 
-                        ui.draggable.removeClass('soon-to-be-removed');
-                        if (ui.draggable.hasClass('not-accepted')) {
-                            ui.draggable.remove();
-                        }
+                        drop: function(event, ui) {
+                            var context = this,
+                                $axisColumns = $(this),
+                                draggedColumn = ui.draggable.data('id'),
+                                newColumn = ui.draggable.hasClass('ui-draggable');
 
-                        $('.column.soon-to-be-removed', $axisColumns).remove();
-                        clearTimeout(_storeTo);
-                        _storeTo = setTimeout(storeConfig, 500);
-                    },
+                            ui.draggable.removeClass('soon-to-be-removed');
+                            if (ui.draggable.hasClass('not-accepted')) {
+                                ui.draggable.remove();
+                            }
 
+                            $('.column.soon-to-be-removed', $axisColumns).remove();
+                            clearTimeout(_storeTo);
+                            _storeTo = setTimeout(storeConfig, 500);
+                        },
+
+                    });
+                });
+
+                // $('.axis').each(function() {
+                //     var accept = _.map(_visJSON.axes[$(this).data('id')].accepts, function(t) {
+                //         return '.column-' + t;
+                //     });
+                //     console.log($(this).data('id'), accept.join(' '));
+                //     $('.axis-columns', this).droppable('option', 'accept', accept.join(' '));
+                // });
+
+                colDiv.droppable({
+                    accept: '.column',
+                    drop: function() {
+                        console.log('drop!');
+                    }
                 });
 
                 /*
@@ -140,6 +171,8 @@ define(['dragdrop'], function() {
                     var axis = $(context).parents('.axis').data('id'),
                         isSingle = _visJSON.axes[axis].multiple !== true,
                         dragged = ui.draggable.data('id');
+
+                    if (el == ui.draggable.get(0)) return false;
 
                     if (ui.helper.hasClass('not-accepted')) return false;
 
