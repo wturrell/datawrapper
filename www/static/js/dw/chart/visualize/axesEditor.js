@@ -204,7 +204,7 @@ define(['dragdrop'], function() {
                         });
                     }
                 });
-                console.log(axesCfg);
+                chart.set('metadata.axes', $.extend({}, axesCfg));
             }
         },
 
