@@ -25,6 +25,7 @@ define(['dragdrop'], function() {
                 _storeTo;
 
             $('.column', colDiv).remove(); // remove existing columns
+            $('.axis', axesDiv).remove(); // remove existing axes
 
             ds.eachColumn(initColumn);
 
